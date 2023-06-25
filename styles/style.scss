@@ -5,6 +5,7 @@
 
 body {
   margin: 0;
+  @apply text-base;
 }
 @layer utilities {
   .flex-center {
@@ -13,5 +14,50 @@ body {
 
   .flex-space {
     @apply flex justify-between items-center space-x-1;
+  }
+  .gradient-bg {
+    @apply bg-gradient-to-r from-[#9D50BB] to-[#6E48AA];
+  }
+}
+
+// antd css that could not be overwritten or are auto generated:
+.ant-menu {
+  border: 0 !important;
+  &-item {
+    @apply text-sm font-semibold py-2;
+    line-height: 20px !important;
+    height: auto !important;
+    margin-bottom: 12px !important;
+    padding-left: 15px !important;
+    &.ant-menu-item-selected {
+      @apply bg-gradient-to-r from-[#9D50BB] to-[#6E48AA] text-white;
+      .anticon {
+        svg {
+          path {
+            @apply fill-white;
+          }
+        }
+        // @apply text-white;
+      }
+    }
+  }
+}
+
+.common-tab-wrapper {
+  .ant-tabs-nav-list {
+    @apply gap-3;
+    .ant-tabs-tab-btn {
+      &:focus {
+        color: inherit !important;
+      }
+    }
+  }
+  .ant-tabs-ink-bar {
+    display: none;
+  }
+  .ant-tabs-nav {
+    &::before {
+      @apply hidden;
+    }
   }
 }

@@ -14,7 +14,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: '#E5002B',
+        primary: '#6E48AA',
         secondary: '#6c757d',
         violet: '#883677',
         congo: '##FF958C',
@@ -30,6 +30,9 @@ module.exports = {
         light: '#F9FBFC',
         white: '#FFF',
         'bg-dark': '#141414',
+      },
+      textColor: {
+        dark: '#515151',
       },
       fontFamily: {
         lato: ['Lato'],

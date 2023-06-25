@@ -1,22 +1,18 @@
-import {
-  HomeOutlined,
-  LogoutOutlined,
-  SettingOutlined,
-  ShopFilled,
-  UnorderedListOutlined,
-  UserAddOutlined,
-  UserOutlined
-} from '@ant-design/icons/lib';
 import { clearAuthFromStorage } from '@shared/utils/cookies-utils/cookies.util';
 import { TOAST_TYPES, showToast } from '@shared/utils/toast-utils/toast.util';
-import { Layout, Menu } from 'antd';
-import { SIDEBAR } from 'constants/sidebar.constants';
+import { Divider, Layout, Menu } from 'antd';
+// import { databaseIcon, pdfIcon } from 'imageConfig';
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
-
+import { useEffect, useState } from 'react';
+import { myAppMenuItems, otherAppMenuItems, topMenuItems } from './menu-item';
 
 const { Sider } = Layout;
 
-const MainLayoutSidebar = ({ collapsed }: { collapsed: boolean }) => {
+const MainLayoutSidebar = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState<any>([]);
+
   const router = useRouter();
 
   const handleLogout = () => {
@@ -25,89 +21,71 @@ const MainLayoutSidebar = ({ collapsed }: { collapsed: boolean }) => {
     showToast(TOAST_TYPES.success, 'You have been logged out.');
   };
 
-  const menuItems = [
-    {
-      key: '1',
-      icon: <HomeOutlined />,
-      label: SIDEBAR.HOME,
-    },
-    {
-      key: '2',
-      icon: <UserOutlined />,
-      label: SIDEBAR.USER,
-      children: [
-        {
-          key: 'sub-user-menu-1',
-          icon: <UnorderedListOutlined />,
-          label: 'List',
-        },
-        {
-          key: 'sub-user-menu-2',
-          icon: <UserAddOutlined />,
-          label: 'Add',
-        },
-      ],
-    },
-    {
-      key: '3',
-      icon: <SettingOutlined />,
-      label: SIDEBAR.SETTINGS,
-    },
-    {
-      key: '4',
-      icon: <ShopFilled />,
-      label: SIDEBAR.ECOMMERCE,
-    },
-    {
-      key: '5',
-      icon: <LogoutOutlined />,
-      label: 'Logout',
-    },
-  ]
+  const combineMenuItems = [
+    ...topMenuItems,
+    ...myAppMenuItems,
+    ...otherAppMenuItems,
+  ];
 
+  useEffect(() => {
+    const currentPath = router.pathname;
 
-  const handleMenu = (key: string) => {
-    switch (key) {
-      case '1':
-        router.push('/');
-        break;
-      case 'sub-user-menu-1':
-        router.push('/users');
-        break;
-      case 'sub-user-menu-2':
-        router.push('/users/create');
-        break;
-      case '3':
-        router.push('/settings');
-      case '4':
-        router.push('/ecommerce');
-        break;
-      case 'menu':
-        router.push('/ecommerce/menu');
-        break;
-      case 'card':
-        router.push('/ecommerce');
-        break;
-      case 'account-details':
-        router.push('/ecommerce/account-details');
-        break;
-      case '4':
-        handleLogout();
-        break;
+    const menuItem: any = combineMenuItems.find((item: any) => {
+      return item?.key === currentPath;
+    });
+    if (menuItem) {
+      setSelectedKeys([menuItem?.key]);
     }
-  }
+  }, [router.pathname]);
+
+  const handleMenu = (path: string) => {
+    if (path && path !== 'divider' && path !== 'title') router.push(path);
+  };
   return (
-    <Sider theme="light" trigger={null} collapsible collapsed={collapsed}>
-      <div className='p-3'>
-        <div className={`h-12  rounded-md flex items-center justify-center  `}>LOGO</div>
-      </div>
+    <Sider
+      theme="light"
+      collapsible
+      collapsed={collapsed}
+      onCollapse={(value) => setCollapsed(value)}
+      width={267}
+      trigger={
+        collapsed ? (
+          <div>
+            <EyeOutlined /> Show
+          </div>
+        ) : (
+          <div>
+            <EyeInvisibleOutlined /> Hide
+          </div>
+        )
+      }
+    >
       <Menu
+        className={`${!collapsed && 'px-6'} py-6`}
         theme="light"
         mode="inline"
+        selectedKeys={selectedKeys}
         defaultSelectedKeys={['1']}
-        items={menuItems}
-        onClick={(value) => handleMenu(value.key)}
-      />
+        // items={combineMenuItems}
+        onClick={(value: any) => handleMenu(value.key)}
+      >
+        {combineMenuItems.map((item: any) => (
+          <>
+            {item?.title && !collapsed && (
+              <span className="uppercase text-sm font-bold block mb-4">
+                {item?.title}
+              </span>
+            )}
+            {item?.key && item?.key?.startsWith('/') && (
+              <Menu.Item key={item.key} icon={item.icon}>
+                {item.label}
+              </Menu.Item>
+            )}
+
+            {item?.divider && <Divider />}
+          </>
+        ))}
+      </Menu>
     </Sider>
   );
 };

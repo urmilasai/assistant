@@ -1,6 +1,6 @@
 import { Layout } from 'antd';
 import Head from 'next/head';
-import React, { useState } from 'react';
+import React from 'react';
 import MainLayoutHeader from './header';
 import MainLayoutSidebar from './side-bar';
 
@@ -12,10 +12,9 @@ type IProps = {
 };
 
 const MainLayout: React.FC<IProps> = ({ children, title }) => {
-  const [collapsed, setCollapsed] = useState(false);
   return (
     <>
-      <Head >
+      <Head>
         <title>{!title ? 'Dashboard - Codebase' : `${title} - Codebase`}</title>
         <meta
           name="description"
@@ -23,20 +22,10 @@ const MainLayout: React.FC<IProps> = ({ children, title }) => {
         />
       </Head>
       <Layout className="layout">
-        <MainLayoutSidebar {...{ collapsed }}></MainLayoutSidebar>
-        <Layout className="site-layout min-h-[100vh]"
-        // style={{ minHeight: '100vh' }}
-        >
-          <MainLayoutHeader {...{ collapsed, setCollapsed }}></MainLayoutHeader>
-          <Content
-            className='mx-1 p-10'
-          // style={{
-          //   margin: '24px 16px',
-          //   padding: 24,
-          // }}
-          >
-            {children}
-          </Content>
+        <MainLayoutHeader />
+        <Layout className="site-layout min-h-[100vh]">
+          <MainLayoutSidebar />
+          <Content className="mx-1 p-10">{children}</Content>
         </Layout>
       </Layout>
     </>

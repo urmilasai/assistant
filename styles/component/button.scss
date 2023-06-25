@@ -4,7 +4,7 @@
   @apply font-semibold rounded-xl shadow-none  capitalize;
 
   &-primary {
-    @apply bg-primary  focus:bg-primary opacity-100  border-primary focus:border-primary;
+    @apply gradient-bg opacity-100;
     &:not(:disabled) {
       @apply hover:bg-primary hover:opacity-90 hover:border-primary text-white;
     }
