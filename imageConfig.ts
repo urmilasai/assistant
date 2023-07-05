@@ -6,6 +6,9 @@ export const user = '/images/user.png';
 
 // icons
 export const settingIcon = '/icons/setting.svg';
+export const databaseIcon = '/icons/vector.svg'
+export const tableIcon = '/icons/vector1.svg'
+export const editorIcon = '/icons/group-60943.svg'
 // export const codingIcon = '/icons/coding.svg';
 // export const databaseIcon = '/icons/database.svg';
 // export const documentIcon = '/icons/setting.svg';

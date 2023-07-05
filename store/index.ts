@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import usersReducer from '@store/slices/user-slice';
+import userDatabaseSlice from './slices/sql-optimizer-slice';
 import metaSlice from './slices/test-slice';
 import usersTableSlice from './slices/users-table-slice';
 
@@ -9,7 +10,8 @@ export const store = configureStore({
   reducer: {
     users: usersReducer,
     userTable: usersTableSlice,
-    metaData: metaSlice
+    metaData: metaSlice,
+    userDatabase:userDatabaseSlice
   },
 });
 

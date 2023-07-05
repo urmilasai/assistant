@@ -35,6 +35,9 @@ const nextConfig = {
       },
     ];
   },
+  publicRuntimeConfig:{
+    baseUrl:"NEXT_LLM_BACKEND_API"
+  },
   images: {
     domains: ['i.dummyjson.com'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

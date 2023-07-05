@@ -1,3 +1,4 @@
+import DatabaseConnector from '@features/sql-optimizer/connect-database';
 import { NextPageWithLayout } from '@pages/_app';
 import MainLayout from '@shared/layouts/main';
 import { Tabs } from 'antd';
@@ -18,7 +19,7 @@ const items = [
   {
     key: '3',
     label: `Connect Database`,
-    children: `Content of Tab Pane 3`,
+    children: <DatabaseConnector />,
   },
 ];
 

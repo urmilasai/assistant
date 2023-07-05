@@ -1,13 +1,13 @@
 import { config } from '@shared/config';
-import { getToken } from '@shared/utils/cookies-utils/cookies.util';
 import axios from 'axios';
 const baseURL = config.gateway.baseURL;
 const axiosInstance = axios.create({
   baseURL: baseURL,
   headers: {
-    Accept: 'application/json',
-    Authorization: `Bearer ${getToken()}`,
+    'Content-Type': 'application/json',
+    'Accept': 'application/json'
   },
+  withCredentials: true
 });
 
 axiosInstance.interceptors.response.use(

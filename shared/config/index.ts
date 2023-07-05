@@ -1,5 +1,5 @@
 export const config = {
   gateway: {
-    baseURL: process.env.NEXT_PUBLIC_BASE_URL,
+    baseURL: process.env.NEXT_LLM_BACKEND_API,
   },
 };
