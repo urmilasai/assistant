@@ -12,8 +12,6 @@
     "prepare": "husky install",
     "check-yarn-lock": "sh -c 'git diff --quiet HEAD yarn.lock || (echo \"Error: New packages have been installed. Please consult wit your team lead of tech lead about the new packages.\" && exit 1)'",
     "local-ssl": "local-ssl-proxy --source 3002 --target 3001"
-
-
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
@@ -31,7 +29,7 @@
     "dayjs": "^1.11.7",
     "eslint": "8.29.0",
     "eslint-config-next": "13.0.6",
-    "next": "13.0.6",
+    "next": "13.4.7",
     "next-themes": "^0.2.1",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
